@@ -31,4 +31,16 @@ print pro.get("path")
 print  os.listdir("C:\\")
 
 for item in os.listdir("C:\\"):
+    #print item.decode("gb2312")
+    #使用pip进行安装：pip install chardet
+    import chardet
+    #打印读物内容的编码格式
+    #print chardet.detect(item)
+    #打印读取内容
     print item.decode("gb2312")
+
+    if os.path.isfile("C:\\"+item):
+        print "This is a file: %s"%item.decode("gb2312")
+        print "This is a file: " + item.decode("gb2312")
+        print "This is a file: " + item
+
