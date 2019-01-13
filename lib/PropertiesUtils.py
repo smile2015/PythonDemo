@@ -13,9 +13,11 @@
 __author__ = 'Administrator'
 
 import sys
-
 reload(sys)
-sys.setdefaultencoding('utf8')
+default_encoding="utf-8"
+if(default_encoding!=sys.getdefaultencoding()):
+    reload(sys)
+    sys.setdefaultencoding(default_encoding)
 
 import re
 import os
@@ -124,7 +126,7 @@ shutil.copy("C:\\a\\1.txt","C:\\b")
 shutil.copy("C:\\a\\2.txt","C:\\b\\121.txt")
 '''
 #复制整个目录(备份)
-shutil.copy(filedir,"D:\\notes\\")
+#shutil.copy(filedir,"D:\\notes\\")
 
 '''
 #删除文件

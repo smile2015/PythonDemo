@@ -13,9 +13,11 @@
 __author__ = 'Administrator'
 
 import sys
-
 reload(sys)
-sys.setdefaultencoding('utf8')
+default_encoding="utf-8"
+if(default_encoding!=sys.getdefaultencoding()):
+    reload(sys)
+    sys.setdefaultencoding(default_encoding)
 
 path="C:\Config\\global.properties"
 
@@ -25,3 +27,8 @@ from lib.PropertiesUtils import *
 pro = parse(path)
 
 print pro.get("path")
+
+print  os.listdir("C:\\")
+
+for item in os.listdir("C:\\"):
+    print item.decode("gb2312")
