@@ -10,6 +10,8 @@
                    2019/1/13 0013:
 -------------------------------------------------
 """
+from com.mosorg.common.file.PropertiesUtils import *
+
 __author__ = 'Administrator'
 
 import sys
@@ -21,7 +23,7 @@ if(default_encoding!=sys.getdefaultencoding()):
 
 path="C:\Config\\global.properties"
 
-from lib.PropertiesUtils import *
+
 
 
 pro = parse(path)
@@ -35,7 +37,7 @@ for item in os.listdir("C:\\"):
     #使用pip进行安装：pip install chardet
     import chardet
     #打印读物内容的编码格式
-    #print chardet.detect(item)
+    print chardet.detect(item)
     #打印读取内容
     print item.decode("gb2312")
 
