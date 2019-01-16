@@ -39,6 +39,8 @@ def show1(*arg):
     print "========函数可变参数，可传递列表作为参数=========="
     for item in arg:
         print item
+    for item in xrange(10):
+        print item
 
 #传递列表作为参数
 itemlist=['Tom','Jhon']
