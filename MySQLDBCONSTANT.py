@@ -36,15 +36,16 @@ dbname="test"
 encoding="utf8"
 
 def init_db_constants():
-    path = "C:\\Users\\Administrator\\PycharmProjects\\GitHub\\PythonDemo\\config\\db.properties"
-
+    db_config_path = "config/db.properties"
     fileUtils=FileUtils()
     db_config_path=fileUtils.getCurrentPath()+"/config/db.properties"
     print db_config_path
+    pro = PropertiesUtils(db_config_path)
+    host = pro.get("host")
+    port = int(pro.get("port"))
+    user = pro.get("user")
+    pwd = pro.get("pwd")
+    dbname = pro.get("dbname")
+    encoding = pro.get("encoding")
 
-    pro = PropertiesUtils(path)
-
-    print pro.has_key("host")
-
-    host1 = pro.get("host")
-    print host1
+init_db_constants()
