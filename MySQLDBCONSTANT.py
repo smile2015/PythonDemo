@@ -10,6 +10,9 @@
                    2019/1/19 0019:
 -------------------------------------------------
 """
+from com.mosorg.common.file.FileUtils import FileUtils
+from com.mosorg.common.file.PropertiesUtils import PropertiesUtils
+
 __author__ = 'Administrator'
 
 import sys
@@ -31,3 +34,17 @@ user="root"
 pwd="test@root"
 dbname="test"
 encoding="utf8"
+
+def init_db_constants():
+    path = "C:\\Users\\Administrator\\PycharmProjects\\GitHub\\PythonDemo\\config\\db.properties"
+
+    fileUtils=FileUtils()
+    db_config_path=fileUtils.getCurrentPath()+"/config/db.properties"
+    print db_config_path
+
+    pro = PropertiesUtils(path)
+
+    print pro.has_key("host")
+
+    host1 = pro.get("host")
+    print host1
