@@ -49,6 +49,7 @@ def add(sql,args=None):
     conn.commit()
 
     # 关闭数据库连接
+    cursor.close()
     conn.close()
 
 def fetchall(sql,args=None):
@@ -81,6 +82,7 @@ def fetchall(sql,args=None):
         print account.toString()
 
     # 关闭数据库连接
+    cursor.close()
     conn.close()
 
 if __name__ == '__main__':

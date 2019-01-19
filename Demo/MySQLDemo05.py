@@ -49,6 +49,7 @@ def delete(sql,args=None):
     conn.commit()
 
     # 关闭数据库连接
+    cursor.close()
     conn.close()
 
 def fetchall(sql,args=None):
@@ -81,6 +82,7 @@ def fetchall(sql,args=None):
         print account.toString()
 
     # 关闭数据库连接
+    cursor.close()
     conn.close()
 
 if __name__ == '__main__':
@@ -88,8 +90,9 @@ if __name__ == '__main__':
     sql_insert1 = "INSERT INTO account (name,password) VALUES (%(name)s,%(password)s);"
     sql_update = "UPDATE account SET password= 'testmodify' WHERE name = 'test42';"
     sql_update1 = "UPDATE account SET password= %(password)s WHERE name = %(name)s;"
-    sql_delete = "DELETE FROM account  WHERE name = 'test42';"
+    sql_delete = "DELETE FROM account  WHERE name = 'test1231';"
     sql_delete1 = "DELETE FROM account WHERE name = %(name)s;"
+    sql_delete2 = "DELETE FROM account WHERE name = %s;"
     select_sql = "SELECT id, name, password,CAST(createtime AS CHAR) AS createtime FROM account;"
     select_sql1 = "SELECT id, name, password,CAST(createtime AS CHAR) AS createtime FROM account WHERE password=%(password)s;"
 
@@ -102,13 +105,28 @@ if __name__ == '__main__':
 
     account=Account()
 
-    account.setName("test41")
+    account.setName("test121")
     account.setPassword("testmodify")
     account_dict={}
     account_dict["name"]=account.getName()
     print account_dict
 
     delete(sql_delete1,account_dict)
+
+    print  "==============fetchall select_sql1======字典传参=================: \n"
+    fetchall(select_sql)
+
+    print  "==============sql_delete1=======列表传参================: \n"
+
+    account = Account()
+
+    account.setName("test11")
+    account.setPassword("testmodify")
+    params = []
+    params.append(account.getName())
+    print params
+
+    delete(sql_delete2, params)
 
     print  "==============fetchall select_sql1======字典传参=================: \n"
     fetchall(select_sql)

@@ -56,6 +56,7 @@ def fetchone(sql):
         print item
 
     # 关闭数据库连接
+    cursor.close()
     conn.close()
 
 if __name__ == '__main__':
