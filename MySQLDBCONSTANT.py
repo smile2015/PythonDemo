@@ -32,7 +32,7 @@ host="localhost"
 port=3306
 user="root"
 pwd="test@root"
-dbname="test"
+dbname=""
 encoding="utf8"
 
 #初始化数据库配置信息
@@ -43,10 +43,16 @@ def init_db_constants():
     print db_config_path
     pro = PropertiesUtils(db_config_path)
     host = pro.get("host")
+    print host
     port = int(pro.get("port"))
+    print port
     user = pro.get("user")
+    print user
     pwd = pro.get("pwd")
+    print pwd
     dbname = pro.get("dbname")
+    print dbname
     encoding = pro.get("encoding")
+    print encoding
 
 init_db_constants()

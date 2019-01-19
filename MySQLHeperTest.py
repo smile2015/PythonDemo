@@ -27,44 +27,48 @@ if (default_encoding != sys.getdefaultencoding()):
 MySQLHelper类测试
 '''
 
-mySqlHelper=MySQLHelper()
-mySqlHelper.connetMySQL(host,user,pwd,dbname)
-print  mySqlHelper.conn
-
-sql_insert="INSERT INTO account (name,password) VALUES ('test','test');"
-sql_update="UPDATE account SET password= 'msmiles1' WHERE name = 'test';"
-sql_delete="DELETE FROM account WHERE name = 'test';"
-select_sql="SELECT * FROM account;"
-
 def queryMySQL():
     # 把一个事务放到一个try块里，如果出现异常就回滚
 
     try:
-        mySqlHelper.cursor.execute(sql_insert)
-        print mySqlHelper.cursor.rowcount
+        print "=======statt"
+        mySqlHelper.execute(sql_insert)
+        print "=======statt1"
 
-        mySqlHelper.cursor.execute(sql_update)
-        print mySqlHelper.cursor.rowcount
+        mySqlHelper.execute(sql_update)
+        print "=======statt2"
 
-        mySqlHelper.cursor.execute(sql_delete)
-        print mySqlHelper.cursor.rowcount
-
-        # 提交事务
-        mySqlHelper.conn.commit()
+        mySqlHelper.execute(sql_delete)
+        print "=======statt3"
 
         # 格式化增删改后的数据查出来
-        mySqlHelper.cursor.execute(select_sql)
-        rs = mySqlHelper.cursor.fetchall()
+        mySqlHelper.execute(select_sql)
+        print "=======statt"
+        rs = mySqlHelper.fetchall()
         for row in rs:
             print "id=%d, name=%s, password=%s, createtime=%s" % row
 
-        mySqlHelper.closeCursor()
         mySqlHelper.closeConnet()
 
     except Exception as e:
+        print "=======Exception"
         mySqlHelper.conn.rollback()  # 若有异常就回滚
-        mySqlHelper.closeCursor()
         mySqlHelper.closeConnet()
 
 if __name__ == '__main__':
-    pass
+
+    sql_insert = "INSERT INTO account (name,password) VALUES ('test','test');"
+    sql_update = "UPDATE account SET password= 'msmiles1' WHERE name = 'test';"
+    sql_delete = "DELETE FROM account WHERE name = 'test';"
+    select_sql = "SELECT * FROM account;"
+
+    mySqlHelper = MySQLHelper()
+    print dbname
+    _conn =mySqlHelper.connetMySQL(host, user, pwd, dbname)
+    print  _conn
+    mySqlHelper.getOneData(select_sql)
+    '''
+    rs = mySqlHelper.execute(select_sql)
+    for row in rs:
+        print "id=%d, name=%s, password=%s, createtime=%s" % row
+        '''
