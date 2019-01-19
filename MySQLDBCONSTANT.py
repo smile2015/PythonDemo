@@ -28,6 +28,6 @@ MySQL数据库配置数据
 host="localhost"
 port=3306
 user="root"
-pwd=""
+pwd="test@root"
 dbname="test"
 encoding="utf8"
