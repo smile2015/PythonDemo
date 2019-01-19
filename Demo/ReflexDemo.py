@@ -23,7 +23,7 @@ if (default_encoding != sys.getdefaultencoding()):
     sys.setdefaultencoding(default_encoding)
 
 '''
-反射示例
+【转载】反射示例
 '''
 
 if __name__ == '__main__':
