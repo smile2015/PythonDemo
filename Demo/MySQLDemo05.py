@@ -10,6 +10,8 @@
                    2019/1/19 0019:
 -------------------------------------------------
 """
+
+
 __author__ = 'Administrator'
 
 import sys
@@ -21,7 +23,7 @@ if (default_encoding != sys.getdefaultencoding()):
     sys.setdefaultencoding(default_encoding)
 
 '''
-Python+MySQLdb: fetchall 示例
+Python+MySQLdb: 删除记录 示例
 '''
 
 from constants.MySQLDBCONSTANT import *
@@ -30,8 +32,24 @@ from constants.MySQLDBCONSTANT import *
 from com.mosorg.common.db.MySQLHelper import MySQLHelper
 from vo.Account import Account
 
+def delete(sql,args=None):
+    mySqlHelper = MySQLHelper()
+    # 打开数据库连接
+    conn = mySqlHelper.connetMySQL(host, user, pwd)
+    #print  conn
+    # 使用cursor()方法获取操作游标
+    cursor = mySqlHelper.getCursor()
+    #print cursor
 
+    # 使用execute方法执行SQL语句
+    cursor.execute("use " + dbname)
+    cursor.execute(sql,args)
 
+    #提交事务
+    conn.commit()
+
+    # 关闭数据库连接
+    conn.close()
 
 def fetchall(sql,args=None):
     mySqlHelper = MySQLHelper()
@@ -66,16 +84,31 @@ def fetchall(sql,args=None):
     conn.close()
 
 if __name__ == '__main__':
-    sql_insert = "INSERT INTO account (name,password) VALUES ('test','test');"
-    sql_update = "UPDATE account SET password= 'msmiles1' WHERE name = 'test';"
-    sql_delete = "DELETE FROM account WHERE name = 'test';"
+    sql_insert = "INSERT INTO account (name,password) VALUES ('test42','test');"
+    sql_insert1 = "INSERT INTO account (name,password) VALUES (%(name)s,%(password)s);"
+    sql_update = "UPDATE account SET password= 'testmodify' WHERE name = 'test42';"
+    sql_update1 = "UPDATE account SET password= %(password)s WHERE name = %(name)s;"
+    sql_delete = "DELETE FROM account  WHERE name = 'test42';"
+    sql_delete1 = "DELETE FROM account WHERE name = %(name)s;"
     select_sql = "SELECT id, name, password,CAST(createtime AS CHAR) AS createtime FROM account;"
     select_sql1 = "SELECT id, name, password,CAST(createtime AS CHAR) AS createtime FROM account WHERE password=%(password)s;"
 
     print  "====dbname: " + dbname
 
-    print  "==============fetchall=======================: \n"
-    fetchall(select_sql)
+    print  "==============sql_delete=======================: \n"
+    delete(sql_delete)
 
-    print  "==============fetchall======字典传参=================: \n"
-    fetchall(select_sql1, {'password': 'test'})
+    print  "==============sql_delete1=======字典传参================: \n"
+
+    account=Account()
+
+    account.setName("test41")
+    account.setPassword("testmodify")
+    account_dict={}
+    account_dict["name"]=account.getName()
+    print account_dict
+
+    delete(sql_delete1,account_dict)
+
+    print  "==============fetchall select_sql1======字典传参=================: \n"
+    fetchall(select_sql)

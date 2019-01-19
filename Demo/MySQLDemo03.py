@@ -10,6 +10,8 @@
                    2019/1/19 0019:
 -------------------------------------------------
 """
+
+
 __author__ = 'Administrator'
 
 import sys
@@ -21,7 +23,7 @@ if (default_encoding != sys.getdefaultencoding()):
     sys.setdefaultencoding(default_encoding)
 
 '''
-Python+MySQLdb: fetchall 示例
+Python+MySQLdb: 插入记录 示例
 '''
 
 from constants.MySQLDBCONSTANT import *
@@ -30,8 +32,24 @@ from constants.MySQLDBCONSTANT import *
 from com.mosorg.common.db.MySQLHelper import MySQLHelper
 from vo.Account import Account
 
+def add(sql,args=None):
+    mySqlHelper = MySQLHelper()
+    # 打开数据库连接
+    conn = mySqlHelper.connetMySQL(host, user, pwd)
+    #print  conn
+    # 使用cursor()方法获取操作游标
+    cursor = mySqlHelper.getCursor()
+    #print cursor
 
+    # 使用execute方法执行SQL语句
+    cursor.execute("use " + dbname)
+    cursor.execute(sql,args)
 
+    #提交事务
+    conn.commit()
+
+    # 关闭数据库连接
+    conn.close()
 
 def fetchall(sql,args=None):
     mySqlHelper = MySQLHelper()
@@ -66,7 +84,8 @@ def fetchall(sql,args=None):
     conn.close()
 
 if __name__ == '__main__':
-    sql_insert = "INSERT INTO account (name,password) VALUES ('test','test');"
+    sql_insert = "INSERT INTO account (name,password) VALUES ('test42','test');"
+    sql_insert1 = "INSERT INTO account (name,password) VALUES (%(name)s,%(password)s);"
     sql_update = "UPDATE account SET password= 'msmiles1' WHERE name = 'test';"
     sql_delete = "DELETE FROM account WHERE name = 'test';"
     select_sql = "SELECT id, name, password,CAST(createtime AS CHAR) AS createtime FROM account;"
@@ -74,8 +93,35 @@ if __name__ == '__main__':
 
     print  "====dbname: " + dbname
 
-    print  "==============fetchall=======================: \n"
-    fetchall(select_sql)
+    print  "==============sql_insert=======================: \n"
+    add(sql_insert)
 
-    print  "==============fetchall======字典传参=================: \n"
+    print  "==============sql_insert1=======字典传参================: \n"
+
+    import random
+    # 生成0到100的随机数
+    rannum = random.randint(0, 100)
+    import time
+    # 生成当前时间戳
+    timenum = time.time()
+    # 将两个数据变成字符串
+    strrannum = str(rannum)
+    print strrannum
+    strtimenum = str(timenum)
+    print strtimenum
+    rantime = "".join((strrannum, strtimenum))
+    print rantime
+
+    account=Account()
+
+    account.setName("rtest"+rantime)
+    account.setPassword("test")
+    account_dict={}
+    account_dict["name"]=account.getName()
+    account_dict["password"]=account.getPassword()
+    print account_dict
+
+    add(sql_insert1,account_dict)
+
+    print  "==============fetchall select_sql1======字典传参=================: \n"
     fetchall(select_sql1, {'password': 'test'})
