@@ -30,3 +30,5 @@ if (default_encoding != sys.getdefaultencoding()):
 mySqlHelper=MySQLHelper()
 mySqlHelper.connetMySQL(host,user,pwd,dbname)
 print  mySqlHelper.conn
+
+

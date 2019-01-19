@@ -35,6 +35,7 @@ pwd="test@root"
 dbname="test"
 encoding="utf8"
 
+#初始化数据库配置信息
 def init_db_constants():
     db_config_path = "config/db.properties"
     fileUtils=FileUtils()
