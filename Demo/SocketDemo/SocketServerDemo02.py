@@ -21,7 +21,7 @@ if (default_encoding != sys.getdefaultencoding()):
     sys.setdefaultencoding(default_encoding)
 
 '''
-socketserver 模块使用：实现多线程，支持多客户端
+socketserver 模块使用：实现多线程，支持多客户端(未调试)
 
 '''
 

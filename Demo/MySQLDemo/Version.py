@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 -------------------------------------------------
-   File Name：     LambdaDemo
+   File Name：     Version
    Description :
    Author :       Administrator
-   date：          2019/1/17 0017
+   date：          2019/1/20 0020
 -------------------------------------------------
    Change Activity:
-                   2019/1/17 0017:
+                   2019/1/20 0020:
 -------------------------------------------------
 """
 __author__ = 'Administrator'
@@ -21,19 +21,8 @@ if (default_encoding != sys.getdefaultencoding()):
     sys.setdefaultencoding(default_encoding)
 
 '''
-Lambda Demo
+用户管理系统 V 1.0
 '''
-a = lambda x,y:x+y
-print a(4,10)
 
-
-
-switch1 = {
-        "a": lambda x: x * 2,
-        "b": lambda x: x * 3,
-        "c": lambda x: x ** x
-    }
-try:
-    print  switch1["a"](6)
-except KeyError as e:
-    pass
+if __name__ == '__main__':
+    print "用户管理系统 V 1.0"
