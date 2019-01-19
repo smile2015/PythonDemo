@@ -35,14 +35,14 @@ from vo.Account import Account
 def delete(sql,args=None):
     mySqlHelper = MySQLHelper()
     # 打开数据库连接
-    conn = mySqlHelper.connetMySQL(host, user, pwd)
+    conn = mySqlHelper.connetMySQL(host, user, pwd, dbname)
     #print  conn
     # 使用cursor()方法获取操作游标
     cursor = mySqlHelper.getCursor()
     #print cursor
 
     # 使用execute方法执行SQL语句
-    cursor.execute("use " + dbname)
+    #cursor.execute("use " + dbname)
     cursor.execute(sql,args)
 
     #提交事务
@@ -55,14 +55,14 @@ def delete(sql,args=None):
 def fetchall(sql,args=None):
     mySqlHelper = MySQLHelper()
     # 打开数据库连接
-    conn = mySqlHelper.connetMySQL(host, user, pwd)
+    conn = mySqlHelper.connetMySQL(host, user, pwd, dbname)
     #print  conn
     # 使用cursor()方法获取操作游标
     cursor = mySqlHelper.getCursor()
     #print cursor
 
     # 使用execute方法执行SQL语句
-    cursor.execute("use " + dbname)
+    #cursor.execute("use " + dbname)
     cursor.execute(sql,args)
 
     accountList = []
@@ -93,6 +93,7 @@ if __name__ == '__main__':
     sql_delete = "DELETE FROM account  WHERE name = 'test1231';"
     sql_delete1 = "DELETE FROM account WHERE name = %(name)s;"
     sql_delete2 = "DELETE FROM account WHERE name = %s;"
+    #CAST(createtime AS CHAR) AS createtime  --在MySQL端处理日期类型数据，将datetime类型转字符串后再返回
     select_sql = "SELECT id, name, password,CAST(createtime AS CHAR) AS createtime FROM account;"
     select_sql1 = "SELECT id, name, password,CAST(createtime AS CHAR) AS createtime FROM account WHERE password=%(password)s;"
 
@@ -113,7 +114,7 @@ if __name__ == '__main__':
 
     delete(sql_delete1,account_dict)
 
-    print  "==============fetchall select_sql1======字典传参=================: \n"
+    print  "==============fetchall select_sql1=======================: \n"
     fetchall(select_sql)
 
     print  "==============sql_delete1=======列表传参================: \n"
@@ -128,5 +129,5 @@ if __name__ == '__main__':
 
     delete(sql_delete2, params)
 
-    print  "==============fetchall select_sql1======字典传参=================: \n"
+    print  "==============fetchall select_sql1=======================: \n"
     fetchall(select_sql)
