@@ -50,8 +50,8 @@ def init_db_constants():
     print user
     pwd = pro.get("pwd")
     print pwd
-    dbname = pro.get("dbname")
-    print dbname
+    db_name = pro.get("db_name")
+    print db_name
     encoding = pro.get("encoding")
     print encoding
 

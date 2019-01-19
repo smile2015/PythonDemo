@@ -10,6 +10,8 @@
                    2019/1/19 0019:
 -------------------------------------------------
 """
+import MySQLdb
+
 from MySQLDBCONSTANT import *
 from com.mosorg.common.db.MySQLHelper import MySQLHelper
 
@@ -63,12 +65,29 @@ if __name__ == '__main__':
     select_sql = "SELECT * FROM account;"
 
     mySqlHelper = MySQLHelper()
-    print dbname
-    _conn =mySqlHelper.connetMySQL(host, user, pwd, dbname)
+    # 打开数据库连接
+    _conn =mySqlHelper.connetMySQL(host, user, pwd)
     print  _conn
-    mySqlHelper.getOneData(select_sql)
+    # 使用cursor()方法获取操作游标
+    _cursor=mySqlHelper.getCursor()
+    print _cursor
+    print  "====dbname"+db_name
+
+    # 使用execute方法执行SQL语句
+    _cursor.execute("use ?",[db_name])
+    _cursor.execute(select_sql)
+
+    # 使用 fetchone() 方法获取一条数据
+    data = _cursor.fetchone()
+
+    print data
+
+    # 关闭数据库连接
+    mySqlHelper.closeConnet()
+
     '''
     rs = mySqlHelper.execute(select_sql)
     for row in rs:
         print "id=%d, name=%s, password=%s, createtime=%s" % row
         '''
+
