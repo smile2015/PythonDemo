@@ -32,7 +32,7 @@ mySqlHelper=MySQLHelper()
 host="localhost"
 port=3306
 user="root"
-pwd="MINGtian2010"
+pwd=""
 dbname="test"
 encoding="utf8"
 mySqlHelper.connetMySQL(host,user,pwd,dbname)
