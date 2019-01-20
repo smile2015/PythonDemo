@@ -27,6 +27,8 @@ if (default_encoding != sys.getdefaultencoding()):
 
 '''
 Account  Manager  impl
+1、使用字典作为MySQL连接参数
+2、使用了类的内置行数进行连接MySQL和断开MySQL，减少打开MySQL次数
 
 '''
 
@@ -34,17 +36,17 @@ class AccountManagerImpl:
 
     def __init__(self):
         self.mySqlHelper = MySQLHelper()
-        self.openConnect()
+        self.connect()
 
     def __str__(self):
         return "This is AccountManagerImpl class"
 
     def __del__(self):  # 回收，脚本执行的最后执行
         print "Del……"  # 显示执行顺序
-        self.closeConnet()
+        self.disConnet()
 
 
-    def openConnect(self):
+    def connect(self):
         '''
         打开数据库连接
         :return: 
@@ -55,7 +57,7 @@ class AccountManagerImpl:
         # 打开数据库连接（改成使用字典进行连接参数传递）
         return self.mySqlHelper.connetMySQLArgsByDict(conn_dict)
 
-    def closeConnet(self):
+    def disConnet(self):
         '''
         断开数据库连接
         :return: 
