@@ -36,7 +36,7 @@ fileUtils=FileUtils()
 #db_config_path=fileUtils.getCurrentPath()+"/../config/db.properties"
 #work_dir = os.path.dirname(os.path.abspath(__file__))
 #db_config_path = os.path.join(work_dir,'config/db.properties')
-db_config_path = os.path.join('C:/Users/Administrator/PycharmProjects/GitHub/PythonDemo/config/db.properties')
+db_config_path = os.path.join('D:/code/GitHub/PythonDemo/config/db.properties')
 print db_config_path
 pro = PropertiesUtils(db_config_path)
 host = pro.get("host")
