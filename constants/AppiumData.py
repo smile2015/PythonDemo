@@ -56,3 +56,11 @@ desired_caps['appActivity'] = 'com.alibaba.android.rimet.biz.SplashActivity'
 #time.sleep(35)
 #退出应用
 #driver.quit()
+
+
+class VmDevicePorts():
+    #逍遥模拟器adb端口号
+    xiaoyaoDevicePort=21513
+    #天天模拟器adb端口号
+    tiantianDevicePort=6555
+    #
