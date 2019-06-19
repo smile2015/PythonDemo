@@ -76,6 +76,7 @@ class Test_appium(unittest.TestCase):
                                        desired_capabilities=desired_caps)
         sleep(20)
 
+
     def tearDown(self):
         unittest.TestCase.tearDown(self)
         # 退出,并实现adb断开连接模拟器设备
